@@ -30,7 +30,7 @@
       }
 
       async function predict() {
-        var  model = await tf.loadGraphModel('./model.json');
+        var  model = await tf.loadGraphModel('tomshev.github.io/model/model.json');
 
         let example = tf.browser.fromPixels(document.getElementById("img1") , 3 ).cast('float32');
         console.log(  example.shape  )
