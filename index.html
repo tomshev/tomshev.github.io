@@ -1,36 +1,36 @@
 
 <html>
-  <head>
+<head>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-  </head>
-  <body>
+</head>
+<body>
 
-  	Make sure to run this via a server
+Make sure to run this via a server
 
-    <br>
-    <input accept="image/*" type='file' id="input_button" />
+<br>
+<input accept="image/*" type='file' id="input_button" />
 
-  	<br>
-    <img id="img1" src="./image.jpg" style="width: 300px " />
-    <br>  <br>
-    <button   onclick="predict()">predict</button>
-    <br>
-    <p id="result"> </p>
+<br>
+<img id="img1" src="./image.jpg" style="width: 300px " />
+<br>  <br>
+<button   onclick="predict()">predict</button>
+<br>
+<p id="result"> </p>
 
-    <script>
+<script>
 
-      let image = document.getElementById('img1');
-      let input_button = document.getElementById('input_button');
+    let image = document.getElementById('img1');
+    let input_button = document.getElementById('input_button');
 
-      input_button.onchange = evt => {
+    input_button.onchange = evt => {
         const [file] = input_button.files
         if (file) {
-          image.src = URL.createObjectURL(file)
+            image.src = URL.createObjectURL(file)
         }
-      }
+    }
 
-      async function predict() {
-        var  model = await tf.loadGraphModel('https://tomshev.github.io/model/model.json');
+    async function predict() {
+        var  model = await tf.loadGraphModel('model/model.json');
 
         let example = tf.browser.fromPixels(document.getElementById("img1") , 3 ).cast('float32');
         console.log(  example.shape  )
@@ -45,9 +45,9 @@
         document.getElementById("result").innerHTML = classes[max_score_id].toString();
 
         if(classes[max_score_id] === "happy") {
-          document.body.style.backgroundColor = "red";
+            document.body.style.backgroundColor = "red";
         }
-      }
-    </script>
-  </body>
+    }
+</script>
+</body>
 </html>
